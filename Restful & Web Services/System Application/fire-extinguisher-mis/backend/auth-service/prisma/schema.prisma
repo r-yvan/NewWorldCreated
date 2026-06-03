@@ -1,6 +1,3 @@
-// Fire Extinguisher Management System (FEMS) - Prisma schema
-// Shared PostgreSQL database for all microservice modules.
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,7 +7,127 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ===================== ENUMS =====================
+model User {
+  id              String               @id @default(uuid()) @db.Uuid
+  firstName       String
+  lastName        String
+  email           String               @unique
+  passwordHash    String
+  role            Role                 @default(USER)
+  isActive        Boolean              @default(true)
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  auditLogs       AuditLog[]
+  inspections     Inspection[]         @relation("InspectorInspections")
+  maintenanceLogs Maintenance[]        @relation("InspectorMaintenance")
+  passwordResets  PasswordResetToken[]
+  refreshTokens   RefreshToken[]
+
+  @@index([role])
+  @@index([email])
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  token     String   @unique
+  userId    String   @db.Uuid
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  token     String   @unique
+  userId    String   @db.Uuid
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+model Extinguisher {
+  id               String             @id @default(uuid()) @db.Uuid
+  serialNumber     String             @unique
+  location         String
+  type             ExtinguisherType
+  size             ExtinguisherSize
+  installationDate DateTime
+  expiryDate       DateTime
+  status           ExtinguisherStatus @default(ACTIVE)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  inspections      Inspection[]
+  maintenanceLogs  Maintenance[]
+
+  @@index([status])
+  @@index([type])
+  @@index([expiryDate])
+  @@index([location])
+  @@map("extinguishers")
+}
+
+model Inspection {
+  id             String           @id @default(uuid()) @db.Uuid
+  extinguisherId String           @db.Uuid
+  scheduledDate  DateTime
+  scheduledTime  String
+  inspectorId    String?          @db.Uuid
+  status         InspectionStatus @default(PENDING)
+  notes          String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  extinguisher   Extinguisher     @relation(fields: [extinguisherId], references: [id], onDelete: Cascade)
+  inspector      User?            @relation("InspectorInspections", fields: [inspectorId], references: [id])
+
+  @@index([extinguisherId])
+  @@index([inspectorId])
+  @@index([status])
+  @@index([scheduledDate])
+  @@map("inspections")
+}
+
+model Maintenance {
+  id              String       @id @default(uuid()) @db.Uuid
+  extinguisherId  String       @db.Uuid
+  inspectorId     String?      @db.Uuid
+  actionTaken     String
+  conditionNotes  String
+  maintenanceDate DateTime
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  extinguisher    Extinguisher @relation(fields: [extinguisherId], references: [id], onDelete: Cascade)
+  inspector       User?        @relation("InspectorMaintenance", fields: [inspectorId], references: [id])
+
+  @@index([extinguisherId])
+  @@index([inspectorId])
+  @@index([maintenanceDate])
+  @@map("maintenance")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String?  @db.Uuid
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entity])
+  @@index([action])
+  @@map("audit_logs")
+}
 
 enum Role {
   ADMIN
@@ -45,130 +162,4 @@ enum InspectionStatus {
   COMPLETED
   OVERDUE
   CANCELLED
-}
-
-// ===================== MODELS =====================
-
-model User {
-  id           String   @id @default(uuid()) @db.Uuid
-  firstName    String
-  lastName     String
-  email        String   @unique
-  passwordHash String
-  role         Role     @default(USER)
-  isActive     Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  refreshTokens     RefreshToken[]
-  passwordResets    PasswordResetToken[]
-  inspections       Inspection[]         @relation("InspectorInspections")
-  maintenanceLogs   Maintenance[]        @relation("InspectorMaintenance")
-  auditLogs         AuditLog[]
-
-  @@index([role])
-  @@index([email])
-  @@map("users")
-}
-
-model RefreshToken {
-  id        String   @id @default(uuid()) @db.Uuid
-  token     String   @unique
-  userId    String   @db.Uuid
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  expiresAt DateTime
-  revoked   Boolean  @default(false)
-  createdAt DateTime @default(now())
-
-  @@index([userId])
-  @@map("refresh_tokens")
-}
-
-model PasswordResetToken {
-  id        String   @id @default(uuid()) @db.Uuid
-  token     String   @unique
-  userId    String   @db.Uuid
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  expiresAt DateTime
-  used      Boolean  @default(false)
-  createdAt DateTime @default(now())
-
-  @@index([userId])
-  @@map("password_reset_tokens")
-}
-
-model Extinguisher {
-  id               String             @id @default(uuid()) @db.Uuid
-  serialNumber     String             @unique
-  location         String
-  type             ExtinguisherType
-  size             ExtinguisherSize
-  installationDate DateTime
-  expiryDate       DateTime
-  status           ExtinguisherStatus @default(ACTIVE)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-
-  inspections     Inspection[]
-  maintenanceLogs Maintenance[]
-
-  @@index([status])
-  @@index([type])
-  @@index([expiryDate])
-  @@index([location])
-  @@map("extinguishers")
-}
-
-model Inspection {
-  id             String           @id @default(uuid()) @db.Uuid
-  extinguisherId String           @db.Uuid
-  extinguisher   Extinguisher     @relation(fields: [extinguisherId], references: [id], onDelete: Cascade)
-  scheduledDate  DateTime
-  scheduledTime  String
-  inspectorId    String?          @db.Uuid
-  inspector      User?            @relation("InspectorInspections", fields: [inspectorId], references: [id], onDelete: SetNull)
-  status         InspectionStatus @default(PENDING)
-  notes          String?
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-
-  @@index([extinguisherId])
-  @@index([inspectorId])
-  @@index([status])
-  @@index([scheduledDate])
-  @@map("inspections")
-}
-
-model Maintenance {
-  id              String       @id @default(uuid()) @db.Uuid
-  extinguisherId  String       @db.Uuid
-  extinguisher    Extinguisher @relation(fields: [extinguisherId], references: [id], onDelete: Cascade)
-  inspectorId     String?      @db.Uuid
-  inspector       User?        @relation("InspectorMaintenance", fields: [inspectorId], references: [id], onDelete: SetNull)
-  actionTaken     String
-  conditionNotes  String
-  maintenanceDate DateTime
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
-
-  @@index([extinguisherId])
-  @@index([inspectorId])
-  @@index([maintenanceDate])
-  @@map("maintenance")
-}
-
-model AuditLog {
-  id        String   @id @default(uuid()) @db.Uuid
-  userId    String?  @db.Uuid
-  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
-  action    String
-  entity    String
-  entityId  String?
-  metadata  Json?
-  createdAt DateTime @default(now())
-
-  @@index([userId])
-  @@index([entity])
-  @@index([action])
-  @@map("audit_logs")
 }

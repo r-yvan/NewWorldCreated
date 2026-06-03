@@ -12,8 +12,27 @@ export function createApp(): Application {
 
   app.disable("x-powered-by");
   app.use(helmet());
-  app.use(express.json({ limit: "1mb" }));
-  app.use(express.urlencoded({ extended: true }));
+  
+  // Custom JSON parser to avoid iconv-lite issues with Bun
+  app.use((req, res, next) => {
+    if (req.headers['content-type']?.includes('application/json')) {
+      let data = '';
+      req.on('data', chunk => { data += chunk; });
+      req.on('end', () => {
+        try {
+          if (data) req.body = JSON.parse(data);
+          else req.body = {};
+          next();
+        } catch (err) {
+          res.status(400).json({ success: false, message: 'Invalid JSON' });
+        }
+      });
+    } else {
+      req.body = {};
+      next();
+    }
+  });
+  
   app.use(hpp());
   app.use(requestLogger);
 

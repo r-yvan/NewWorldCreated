@@ -37,7 +37,7 @@ export interface PublicUser {
 
 export function toPublicUser(user: User): PublicUser {
   const { passwordHash, ...rest } = user;
-  return rest as PublicUser;
+  return rest;
 }
 
 async function issueTokens(user: User): Promise<AuthTokens> {

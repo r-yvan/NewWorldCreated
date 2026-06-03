@@ -1,8 +1,8 @@
 import type { AuthTokens, User } from "@/types/models";
 
-const ACCESS_KEY = "fems-access-token";
-const REFRESH_KEY = "fems-refresh-token";
-const USER_KEY = "fems-user";
+const ACCESS_KEY = "tzw-access-token";
+const REFRESH_KEY = "tzw-refresh-token";
+const USER_KEY = "tzw-user";
 
 export const storage = {
   getAccessToken(): string | null {

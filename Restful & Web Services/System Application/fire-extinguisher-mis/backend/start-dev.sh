@@ -12,6 +12,9 @@ PIDS_FILE=".dev-pids"
 start_services() {
     echo "🚀 Starting FEMS microservices..."
     
+    # Create logs directory if it doesn't exist
+    mkdir -p logs
+    
     # Clear previous PIDs
     > "$PIDS_FILE"
     

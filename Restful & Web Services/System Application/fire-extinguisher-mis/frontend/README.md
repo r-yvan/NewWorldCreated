@@ -1,6 +1,6 @@
-# FEMS Frontend
+# TZW LTD Frontend
 
-Production-grade React + TypeScript frontend for the **Fire Extinguisher Management System (FEMS)**. Fully integrated with the FEMS backend API, with a monochromatic enterprise design system, dark/light theme, role-based access control, and complete CRUD across every backend module.
+Production-grade React + TypeScript frontend for **TZW LTD - Fire Extinguisher Management System**. Fully integrated with the backend API, with a monochromatic enterprise design system, dark/light theme, role-based access control, and complete CRUD across every backend module.
 
 ## Tech stack
 
@@ -30,9 +30,9 @@ bun run dev            # starts Vite on http://localhost:3000
 
 | Role | Email | Password |
 | --- | --- | --- |
-| Admin | `admin@fems.com` | `Admin@123` |
-| Inspector | `inspector@fems.com` | `Inspector@123` |
-| User | `user@fems.com` | `User@123` |
+| Admin | `admin@tzw.com` | `Admin@123` |
+| Inspector | `inspector@tzw.com` | `Inspector@123` |
+| User | `user@tzw.com` | `User@123` |
 
 The login screen includes one-click demo sign-in buttons.
 

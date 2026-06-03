@@ -14,9 +14,9 @@ const schema = Yup.object({
 });
 
 const demoAccounts = [
-  { label: "Admin", email: "admin@fems.com", password: "Admin@123" },
-  { label: "Inspector", email: "inspector@fems.com", password: "Inspector@123" },
-  { label: "User", email: "user@fems.com", password: "User@123" },
+  { label: "Admin", email: "admin@tzw.com", password: "Admin@123" },
+  { label: "Inspector", email: "inspector@tzw.com", password: "Inspector@123" },
+  { label: "User", email: "user@tzw.com", password: "User@123" },
 ];
 
 export default function LoginPage() {
@@ -27,7 +27,7 @@ export default function LoginPage() {
   const from = (location.state as { from?: { pathname: string } })?.from?.pathname || "/dashboard";
 
   return (
-    <AuthLayout title="Welcome back" subtitle="Sign in to your FEMS account to continue.">
+    <AuthLayout title="Welcome back" subtitle="Sign in to your TZW LTD account to continue.">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={schema}

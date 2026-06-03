@@ -1,9 +1,5 @@
 # Fire Extinguisher Management System (FEMS) — Backend
 
-> **🎉 Microservices Migration Complete!**  
-> The backend has been migrated to a microservices architecture with zero breaking changes.  
-> All API endpoints remain unchanged. See **[MICROSERVICES.md](MICROSERVICES.md)** for details.
-
 A production-ready RESTful backend for managing fire extinguishers, inspections, maintenance, compliance reporting, and users. Built with **Express + Bun + PostgreSQL + Prisma + Zod + JWT**, structured as an **API Gateway + microservice modules** following the **Controller → Service → Repository** pattern.
 
 ---

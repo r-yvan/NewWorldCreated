@@ -58,7 +58,7 @@ router.post(
  *             type: object
  *             required: [email, password]
  *             properties:
- *               email: { type: string, example: admin@fems.com }
+ *               email: { type: string, example: admin@tzw.com }
  *               password: { type: string, example: Admin@123 }
  *     responses:
  *       200: { description: Login successful }
@@ -136,7 +136,7 @@ router.post(
  *             type: object
  *             required: [email]
  *             properties:
- *               email: { type: string, example: admin@fems.com }
+ *               email: { type: string, example: admin@tzw.com }
  *     responses:
  *       200: { description: Reset token generated if email exists }
  */

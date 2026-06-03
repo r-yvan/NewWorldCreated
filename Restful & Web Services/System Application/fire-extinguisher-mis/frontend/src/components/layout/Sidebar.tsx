@@ -53,7 +53,7 @@ function Brand() {
         <Flame className="h-5 w-5 text-primary-foreground" />
       </div>
       <div className="leading-tight">
-        <p className="text-sm font-bold tracking-tight">FEMS</p>
+        <p className="text-sm font-bold tracking-tight">TZW LTD</p>
         <p className="text-[11px] text-muted-foreground">Fire Safety Platform</p>
       </div>
     </div>
@@ -67,7 +67,7 @@ export function Sidebar() {
       <NavContent />
       <div className="border-t border-border p-4">
         <p className="text-[11px] text-muted-foreground">
-          &copy; {new Date().getFullYear()} FEMS Enterprise
+          &copy; {new Date().getFullYear()} TZW LTD
         </p>
       </div>
     </aside>

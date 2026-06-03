@@ -1,7 +1,7 @@
 import * as React from "react";
 
 type Theme = "light" | "dark";
-const STORAGE_KEY = "fems-theme";
+const STORAGE_KEY = "tzw-theme";
 
 interface ThemeContextValue {
   theme: Theme;

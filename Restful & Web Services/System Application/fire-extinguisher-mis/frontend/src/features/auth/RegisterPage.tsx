@@ -30,7 +30,7 @@ export default function RegisterPage() {
   const navigate = useNavigate();
 
   return (
-    <AuthLayout title="Create your account" subtitle="Get started with the FEMS platform in seconds.">
+    <AuthLayout title="Create your account" subtitle="Get started with the TZW LTD platform in seconds.">
       <Formik
         initialValues={{ firstName: "", lastName: "", email: "", password: "" }}
         validationSchema={schema}

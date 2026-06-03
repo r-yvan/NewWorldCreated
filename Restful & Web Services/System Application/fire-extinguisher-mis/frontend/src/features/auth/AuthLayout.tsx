@@ -27,7 +27,7 @@ export function AuthLayout({
             <Flame className="h-6 w-6" />
           </div>
           <div>
-            <p className="text-lg font-bold tracking-tight">FEMS</p>
+            <p className="text-lg font-bold tracking-tight">TZW LTD</p>
             <p className="text-xs text-primary-foreground/70">
               Fire Extinguisher Management System
             </p>
@@ -66,7 +66,7 @@ export function AuthLayout({
         </div>
 
         <p className="relative text-xs text-primary-foreground/50">
-          &copy; {new Date().getFullYear()} FEMS Enterprise. All rights reserved.
+          &copy; {new Date().getFullYear()} TZW LTD. All rights reserved.
         </p>
       </div>
 
@@ -77,7 +77,7 @@ export function AuthLayout({
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
               <Flame className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="font-bold">FEMS</span>
+            <span className="font-bold">TZW LTD</span>
           </div>
           <div className="ml-auto">
             <ThemeToggle />
