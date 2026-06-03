@@ -1,0 +1,205 @@
+// Fire Extinguisher Management System (FEMS) - Database Schema
+// Copy this content to https://dbdiagram.io to visualize the database model
+
+Project FEMS {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # Fire Extinguisher Management System Database
+    
+    This database supports a microservices architecture with:
+    - Auth Service (authentication, JWT tokens, password resets)
+    - User Service (user management, profiles)
+    - Extinguisher Service (fire extinguisher registration & tracking)
+    - Inspection Service (inspection scheduling & records)
+    - Maintenance Service (maintenance logs)
+    - Reporting Service (analytics & exports)
+    
+    All services share this single PostgreSQL database for simplified
+    data consistency and deployment.
+  '''
+}
+
+// ===================== ENUMS =====================
+
+Enum Role {
+  ADMIN
+  INSPECTOR
+  USER
+}
+
+Enum ExtinguisherType {
+  WATER
+  CO2
+  FOAM
+  DRY_CHEMICAL
+}
+
+Enum ExtinguisherSize {
+  "2_5_LBS"
+  "5_LBS"
+  "9_LBS"
+  "12_LBS"
+}
+
+Enum ExtinguisherStatus {
+  ACTIVE
+  EXPIRED
+  UNDER_MAINTENANCE
+  INSPECTION_DUE
+  OUT_OF_SERVICE
+}
+
+Enum InspectionStatus {
+  PENDING
+  COMPLETED
+  OVERDUE
+  CANCELLED
+}
+
+// ===================== TABLES =====================
+
+Table users {
+  id uuid [pk, default: `gen_random_uuid()`]
+  firstName varchar [not null]
+  lastName varchar [not null]
+  email varchar [unique, not null]
+  passwordHash varchar [not null, note: 'Bcrypt hashed password']
+  role Role [not null, default: 'USER']
+  isActive boolean [not null, default: true]
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    email
+    role
+  }
+  
+  Note: 'System users with role-based access control (ADMIN, INSPECTOR, USER)'
+}
+
+Table refresh_tokens {
+  id uuid [pk, default: `gen_random_uuid()`]
+  token varchar [unique, not null, note: 'JWT refresh token']
+  userId uuid [not null, ref: > users.id]
+  expiresAt timestamp [not null]
+  revoked boolean [not null, default: false]
+  createdAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    userId
+    token
+  }
+  
+  Note: 'JWT refresh tokens for token rotation and session management'
+}
+
+Table password_reset_tokens {
+  id uuid [pk, default: `gen_random_uuid()`]
+  token varchar [unique, not null]
+  userId uuid [not null, ref: > users.id]
+  expiresAt timestamp [not null]
+  used boolean [not null, default: false]
+  createdAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    userId
+    token
+  }
+  
+  Note: 'One-time password reset tokens (expires after 30 minutes by default)'
+}
+
+Table extinguishers {
+  id uuid [pk, default: `gen_random_uuid()`]
+  serialNumber varchar [unique, not null]
+  location varchar [not null, note: 'Physical location (e.g., Building A - Floor 1 - Room 101)']
+  type ExtinguisherType [not null]
+  size ExtinguisherSize [not null]
+  installationDate date [not null]
+  expiryDate date [not null]
+  status ExtinguisherStatus [not null, default: 'ACTIVE']
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    serialNumber
+    status
+    type
+    expiryDate
+    location
+  }
+  
+  Note: 'Fire extinguisher inventory with tracking of location, type, and status'
+}
+
+Table inspections {
+  id uuid [pk, default: `gen_random_uuid()`]
+  extinguisherId uuid [not null, ref: > extinguishers.id]
+  scheduledDate date [not null]
+  scheduledTime varchar [not null, note: 'Time in HH:MM format']
+  inspectorId uuid [ref: > users.id, note: 'Inspector assigned (nullable)']
+  status InspectionStatus [not null, default: 'PENDING']
+  notes text [null, note: 'Inspection findings and observations']
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    extinguisherId
+    inspectorId
+    status
+    scheduledDate
+  }
+  
+  Note: 'Scheduled and completed inspection records with pass/fail status'
+}
+
+Table maintenance {
+  id uuid [pk, default: `gen_random_uuid()`]
+  extinguisherId uuid [not null, ref: > extinguishers.id]
+  inspectorId uuid [ref: > users.id, note: 'Technician who performed maintenance (nullable)']
+  actionTaken text [not null, note: 'Maintenance actions performed']
+  conditionNotes text [not null, note: 'Condition assessment notes']
+  maintenanceDate timestamp [not null]
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    extinguisherId
+    inspectorId
+    maintenanceDate
+  }
+  
+  Note: 'Maintenance history logs for repairs, refills, and servicing'
+}
+
+Table audit_logs {
+  id uuid [pk, default: `gen_random_uuid()`]
+  userId uuid [ref: > users.id, note: 'User who performed action (nullable for system actions)']
+  action varchar [not null, note: 'Action performed (CREATE, UPDATE, DELETE, LOGIN, etc.)']
+  entity varchar [not null, note: 'Entity type affected (User, Extinguisher, Inspection, etc.)']
+  entityId varchar [null, note: 'ID of affected entity']
+  metadata jsonb [null, note: 'Additional context (old values, new values, IP address, etc.)']
+  createdAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    userId
+    entity
+    action
+    createdAt
+  }
+  
+  Note: 'Audit trail for compliance and security tracking'
+}
+
+// ===================== RELATIONSHIPS =====================
+
+// User relationships
+Ref: refresh_tokens.userId > users.id [delete: cascade, note: 'User has many refresh tokens']
+Ref: password_reset_tokens.userId > users.id [delete: cascade, note: 'User can request password resets']
+Ref: inspections.inspectorId > users.id [delete: set null, note: 'Inspector performs inspections']
+Ref: maintenance.inspectorId > users.id [delete: set null, note: 'Technician performs maintenance']
+Ref: audit_logs.userId > users.id [delete: set null, note: 'User actions are logged']
+
+// Extinguisher relationships
+Ref: inspections.extinguisherId > extinguishers.id [delete: cascade, note: 'Extinguisher has many inspections']
+Ref: maintenance.extinguisherId > extinguishers.id [delete: cascade, note: 'Extinguisher has maintenance history']

@@ -1,0 +1,227 @@
+{
+  "info": {
+    "name": "FEMS - Fire Extinguisher Management System",
+    "description": "Complete API collection for the FEMS backend (Auth, Users, Extinguishers, Inspections, Maintenance, Reports).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "accessToken", "value": "" },
+    { "key": "refreshToken", "value": "" },
+    { "key": "extinguisherId", "value": "" },
+    { "key": "userId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"] },
+            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"StrongP@ss1\"\n}" }
+          }
+        },
+        {
+          "name": "Login (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.data) {",
+                  "  pm.collectionVariables.set('accessToken', res.data.accessToken);",
+                  "  pm.collectionVariables.set('refreshToken', res.data.refreshToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@fems.com\",\n  \"password\": \"Admin@123\"\n}" }
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/auth/me", "host": ["{{baseUrl}}"], "path": ["api", "auth", "me"] }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/refresh-token", "host": ["{{baseUrl}}"], "path": ["api", "auth", "refresh-token"] },
+            "body": { "mode": "raw", "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}" }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/forgot-password", "host": ["{{baseUrl}}"], "path": ["api", "auth", "forgot-password"] },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@fems.com\"\n}" }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/reset-password", "host": ["{{baseUrl}}"], "path": ["api", "auth", "reset-password"] },
+            "body": { "mode": "raw", "raw": "{\n  \"token\": \"<reset-token>\",\n  \"newPassword\": \"NewStr0ng@Pass\"\n}" }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/logout", "host": ["{{baseUrl}}"], "path": ["api", "auth", "logout"] },
+            "body": { "mode": "raw", "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/users?page=1&limit=10", "host": ["{{baseUrl}}"], "path": ["api", "users"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "10" }] } }
+        },
+        {
+          "name": "Get Profile",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/users/profile", "host": ["{{baseUrl}}"], "path": ["api", "users", "profile"] } }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/users/profile", "host": ["{{baseUrl}}"], "path": ["api", "users", "profile"] },
+            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"Updated\"\n}" }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/users/change-password", "host": ["{{baseUrl}}"], "path": ["api", "users", "change-password"] },
+            "body": { "mode": "raw", "raw": "{\n  \"currentPassword\": \"Admin@123\",\n  \"newPassword\": \"NewAdm1n@Pass\"\n}" }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/users", "host": ["{{baseUrl}}"], "path": ["api", "users"] },
+            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"New\",\n  \"lastName\": \"Inspector\",\n  \"email\": \"new.inspector@fems.com\",\n  \"password\": \"StrongP@ss1\",\n  \"role\": \"INSPECTOR\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Extinguishers",
+      "item": [
+        {
+          "name": "List Extinguishers",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/extinguishers?page=1&limit=10&status=ACTIVE", "host": ["{{baseUrl}}"], "path": ["api", "extinguishers"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "10" }, { "key": "status", "value": "ACTIVE" }] } }
+        },
+        {
+          "name": "Create Extinguisher",
+          "event": [
+            { "listen": "test", "script": { "exec": ["const res = pm.response.json();", "if (res.data && res.data.id) pm.collectionVariables.set('extinguisherId', res.data.id);"], "type": "text/javascript" } }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/extinguishers", "host": ["{{baseUrl}}"], "path": ["api", "extinguishers"] },
+            "body": { "mode": "raw", "raw": "{\n  \"serialNumber\": \"FE-9001\",\n  \"location\": \"Warehouse A - Floor 1\",\n  \"type\": \"CO2\",\n  \"size\": \"SIZE_5_LBS\",\n  \"installationDate\": \"2024-01-15\",\n  \"expiryDate\": \"2029-01-15\"\n}" }
+          }
+        },
+        {
+          "name": "Get Extinguisher",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/extinguishers/{{extinguisherId}}", "host": ["{{baseUrl}}"], "path": ["api", "extinguishers", "{{extinguisherId}}"] } }
+        },
+        {
+          "name": "Update Extinguisher",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/extinguishers/{{extinguisherId}}", "host": ["{{baseUrl}}"], "path": ["api", "extinguishers", "{{extinguisherId}}"] },
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"UNDER_MAINTENANCE\"\n}" }
+          }
+        },
+        {
+          "name": "Delete Extinguisher",
+          "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/extinguishers/{{extinguisherId}}", "host": ["{{baseUrl}}"], "path": ["api", "extinguishers", "{{extinguisherId}}"] } }
+        }
+      ]
+    },
+    {
+      "name": "Inspections",
+      "item": [
+        {
+          "name": "List Inspections",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/inspections?status=PENDING", "host": ["{{baseUrl}}"], "path": ["api", "inspections"], "query": [{ "key": "status", "value": "PENDING" }] } }
+        },
+        {
+          "name": "Schedule Inspection",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/inspections", "host": ["{{baseUrl}}"], "path": ["api", "inspections"] },
+            "body": { "mode": "raw", "raw": "{\n  \"extinguisherId\": \"{{extinguisherId}}\",\n  \"scheduledDate\": \"2026-12-01\",\n  \"scheduledTime\": \"14:30\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Maintenance",
+      "item": [
+        {
+          "name": "List Maintenance",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/maintenance", "host": ["{{baseUrl}}"], "path": ["api", "maintenance"] } }
+        },
+        {
+          "name": "Create Maintenance Log",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/maintenance", "host": ["{{baseUrl}}"], "path": ["api", "maintenance"] },
+            "body": { "mode": "raw", "raw": "{\n  \"extinguisherId\": \"{{extinguisherId}}\",\n  \"actionTaken\": \"Replaced pressure gauge\",\n  \"conditionNotes\": \"Unit in good condition\",\n  \"maintenanceDate\": \"2026-06-01\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        { "name": "Dashboard", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/reports/dashboard", "host": ["{{baseUrl}}"], "path": ["api", "reports", "dashboard"] } } },
+        { "name": "Extinguisher Totals", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/reports/extinguishers", "host": ["{{baseUrl}}"], "path": ["api", "reports", "extinguishers"] } } },
+        { "name": "Inspection Status", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/reports/inspection-status", "host": ["{{baseUrl}}"], "path": ["api", "reports", "inspection-status"] } } },
+        { "name": "Expired", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/reports/expired", "host": ["{{baseUrl}}"], "path": ["api", "reports", "expired"] } } },
+        { "name": "Maintenance History", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/reports/maintenance-history", "host": ["{{baseUrl}}"], "path": ["api", "reports", "maintenance-history"] } } },
+        { "name": "Export PDF", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/reports/export/pdf", "host": ["{{baseUrl}}"], "path": ["api", "reports", "export", "pdf"] } } },
+        { "name": "Export CSV", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/reports/export/csv", "host": ["{{baseUrl}}"], "path": ["api", "reports", "export", "csv"] } } }
+      ]
+    }
+  ]
+}
