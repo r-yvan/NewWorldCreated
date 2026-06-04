@@ -1,7 +1,7 @@
-api-gateway:22041:5000
-auth-service:22072:5001
-user-service:22134:5002
-extinguisher-service:22213:5003
-inspection-service:22291:5004
-maintenance-service:22349:5005
-reporting-service:22399:5006
+api-gateway:12653:5000
+auth-service:12687:5001
+user-service:12748:5002
+extinguisher-service:12807:5003
+inspection-service:12859:5004
+maintenance-service:12931:5005
+reporting-service:13001:5006
