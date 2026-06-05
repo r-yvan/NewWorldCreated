@@ -1,0 +1,21 @@
+package com.ubs.config;
+
+import com.ubs.service.OverduePenaltyService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class OverduePenaltyScheduler {
+
+    private final OverduePenaltyService overduePenaltyService;
+
+    @Scheduled(cron = "${app.penalty.cron:0 0 1 * * *}")
+    public void runDailyPenaltyCheck() {
+        log.debug("Running scheduled overdue penalty check");
+        overduePenaltyService.applyOverduePenalties();
+    }
+}
