@@ -2,17 +2,6 @@
 
 Production-ready Spring Boot backend for a national utility company managing **water** (postpaid) and **electricity** (transitioning to postpaid) billing.
 
-## Design Documentation
-
-| Document | Description |
-|----------|-------------|
-| [docs/ERD.md](docs/ERD.md) | Entity Relationship Diagram (Mermaid) |
-| [docs/FLOW-DIAGRAM.md](docs/FLOW-DIAGRAM.md) | Spring Boot flow diagrams (Mermaid) |
-| [docs/SUBMISSION-CHECKLIST.md](docs/SUBMISSION-CHECKLIST.md) | Exam demo & submission checklist |
-| [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md) | Full API testing guide with all endpoints |
-
-Render diagrams at [mermaid.live](https://mermaid.live) — copy any ` ```mermaid ` block and export PNG/SVG.
-
 ## Technologies
 
 - Java 17

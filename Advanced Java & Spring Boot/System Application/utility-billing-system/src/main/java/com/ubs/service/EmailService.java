@@ -19,7 +19,15 @@ public class EmailService {
     private String mailFrom;
 
     @Async
-    public boolean sendEmail(String to, String subject, String body) {
+    public void sendEmail(String to, String subject, String body) {
+        doSendEmail(to, subject, body);
+    }
+
+    public boolean sendEmailSync(String to, String subject, String body) {
+        return doSendEmail(to, subject, body);
+    }
+
+    private boolean doSendEmail(String to, String subject, String body) {
         try {
             if (mailSender == null) {
                 log.warn("Mail sender not configured; skipping email to {}", to);

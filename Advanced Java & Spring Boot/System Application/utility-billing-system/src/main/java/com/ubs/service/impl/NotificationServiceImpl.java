@@ -68,7 +68,7 @@ public class NotificationServiceImpl implements com.ubs.service.NotificationServ
             try {
                 String email = notification.getCustomer().getEmail();
                 String subject = buildSubject(notification.getNotificationType());
-                boolean sent = emailService.sendEmail(email, subject, notification.getMessage());
+                boolean sent = emailService.sendEmailSync(email, subject, notification.getMessage());
 
                 if (sent) {
                     notification.setStatus(NotificationStatus.SENT);
