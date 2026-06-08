@@ -1,0 +1,1683 @@
+# SECTION 3 — MOBILE APPLICATION FRONTEND GENERATION
+
+
+
+# PHASE 2 — FRONTEND TECHNOLOGY STACK
+
+
+
+Build the frontend using:
+
+
+
+## Core Stack
+
+
+
+* Expo Stack (bun x create-expo-stack@latest app-name --nativewind --expo-router)
+
+* TypeScript
+
+* Expo Router Architecture
+
+
+
+## Styling
+
+
+
+* Nativewind
+
+
+
+## Icons
+
+
+
+* @tabler/icons-react-native
+
+
+
+## Forms
+
+
+
+* Formik and
+
+* Yup Validation
+
+
+
+## Animations
+
+
+
+## Charts
+
+
+
+* Gradient Area Charts
+
+* Line Charts
+
+* Bar Charts
+
+* Pie Charts
+
+* Analytics Visualizations
+
+
+
+---
+
+
+
+# PHASE 3 — DESIGN SYSTEM
+
+
+
+Create a complete design system.
+
+
+
+## Theme Support
+
+
+
+Implement:
+
+
+
+* Dark Mode
+
+* Light Mode
+
+
+
+## Color Palette
+
+
+
+Primary colors:
+
+
+
+* Black
+
+* White
+
+* Gray Scale
+
+* Blueviolet colors
+
+
+
+Accent colors should be minimal, professional, and consistent.
+
+
+
+## UI Style
+
+
+
+The UI must be:
+
+
+
+* Modern
+
+* Premium
+
+* Enterprise-grade
+
+* Professional
+
+* Minimalistic
+
+* Clean
+
+* Elegant
+
+* Highly polished
+
+
+
+Use:
+
+
+
+* Glassmorphism where appropriate
+
+* Soft shadows
+
+* Smooth hover states
+
+* Micro-interactions
+
+* Motion-based transitions
+
+* Consistent spacing system
+
+* Professional typography hierarchy
+
+
+
+---
+
+
+
+# PHASE 4 — COMPLETE BACKEND FEATURE MAPPING
+
+
+
+CRITICAL REQUIREMENT:
+
+Create:
+
+
+
+* Page
+
+* Screen
+
+* Component
+
+* Form
+
+* Table
+
+* Dialog
+
+* Workflow
+
+* Navigation entry
+
+
+
+---
+
+
+
+# PHASE 5 — API INTEGRATION (MANDATORY)
+
+
+
+The frontend must integrate directly with the mockapi.
+
+
+
+## API Layer
+
+
+
+* Use AXIOS for API integration
+
+* Request interceptors
+
+* Response interceptors
+
+* Error handling
+
+* Token refresh mechanism
+
+
+
+## Type Safety
+
+
+
+Generate TypeScript interfaces directly from backend DTOs.
+
+
+
+Frontend types must mirror backend contracts exactly.
+
+
+
+---
+
+
+
+# PHASE 6 — AUTHENTICATION & AUTHORIZATION
+
+
+
+Implement complete authentication flows:
+
+
+
+## Authentication
+
+
+
+* Login
+
+* Registration
+
+* Forgot Password
+
+* Reset Password
+
+* Logout
+
+* Refresh Tokens
+
+
+
+## Security
+
+
+
+* Protected Routes
+
+* Route Guards
+
+* Session Persistence
+
+* Automatic Token Refresh
+
+* Secure Storage Strategy
+
+
+
+## Authorization
+
+
+
+Implement Role-Based Access Control using backend permissions.
+
+
+
+Frontend permissions must be synchronized with backend authorization rules.
+
+
+
+Users must only see features they are authorized to access.
+
+
+
+---
+
+
+
+# PHASE 7 — DASHBOARD SYSTEM
+
+
+
+Create a premium analytics dashboard.
+
+
+
+Include:
+
+
+
+* KPI Cards
+
+* Statistics Widgets
+
+* Activity Feed
+
+* Recent Actions
+
+* Analytics Charts
+
+* Summary Reports
+
+* Dynamic Filters
+
+* Search
+
+* Pagination
+
+* Export Actions
+
+
+
+Dashboard data must come from mocked backend APIs.
+
+
+
+# PHASE 8 — REUSABLE COMPONENT SYSTEM
+
+
+
+Create reusable components for:
+
+
+
+## Navigation
+
+
+
+* Sidebar
+
+* Top Navbar
+
+* User Profile Dropdown
+
+* Breadcrumbs
+
+
+
+## Data Display
+
+
+
+* Cards
+
+* Statistics Cards
+
+* Tables
+
+* Data Grids
+
+* Charts
+
+* Timelines
+
+
+
+## User Interaction
+
+
+
+* Dialogs
+
+* Modals
+
+* Drawer Navigation
+
+* Dropdowns
+
+* Tabs
+
+* Tooltips
+
+* Popovers
+
+
+
+## Forms
+
+
+
+* Form Builder Components
+
+* Input Components
+
+* Select Components
+
+* Date Pickers
+
+* Multi-Step Forms
+
+* File Upload Components
+
+
+
+## Feedback
+
+
+
+* Toasters
+
+* Notifications
+
+* Alerts
+
+* Push Notifications
+
+* Confirmation Dialogs
+
+
+
+## States
+
+
+
+* Loading States
+
+* Skeleton Loaders
+
+* Empty States
+
+* Error States
+
+* Success States
+
+
+
+STRICT REQUIREMENT:
+
+
+
+Every reusable component must be used throughout the application.
+
+
+
+---
+
+
+
+# PHASE 9 — STATE MANAGEMENT
+
+
+
+Implement scalable state management.
+
+
+
+Use:
+
+
+
+* React Context
+
+* Custom Hooks
+
+* Feature-based State Organization
+
+
+
+Provide:
+
+
+
+* Authentication State
+
+* User State
+
+* Permission State
+
+* Theme State
+
+* Global Notification State
+
+
+
+---
+
+
+
+# PHASE 10 — ARCHITECTURE
+
+
+
+Use Feature-Based Architecture.
+
+
+
+Example:
+
+
+
+src/
+
+├── app/
+
+├── components/
+
+├── features/
+
+├── hooks/
+
+├── services/
+
+├── lib/
+
+├── types/
+
+├── providers/
+
+├── contexts/
+
+├── utils/
+
+├── constants/
+
+
+
+Architecture must be scalable and enterprise-ready.
+
+
+
+# PHASE 12 — PERFORMANCE
+
+
+
+Implement:
+
+
+
+* Code Splitting
+
+* Lazy Loading
+
+* Dynamic Imports
+
+* Memoization
+
+* Optimized Rendering
+
+* Image Optimization
+
+* Route-Level Loading
+
+
+
+---
+
+
+
+# PHASE 13 — ACCESSIBILITY
+
+
+
+Implement:
+
+
+
+* WCAG Best Practices
+
+* Keyboard Navigation
+
+* Proper Labels
+
+* Focus Management
+
+* ARIA Attributes
+
+
+
+---
+
+
+
+# PHASE 15 — VISUAL DESIGN SYSTEM & THEME SPECIFICATION (MANDATORY)
+
+
+
+This application must follow a strict monochromatic enterprise design language.
+
+
+
+The visual identity should resemble modern premium SaaS platforms, enterprise management systems, executive analytics dashboards, financial platforms, ERP systems, and modern administrative applications.
+
+
+
+The frontend must prioritize:
+
+
+
+* Clarity
+
+* Professionalism
+
+* Accessibility
+
+* Readability
+
+* Consistency
+
+* Maintainability
+
+* Enterprise-grade aesthetics
+
+
+
+The final interface should feel:
+
+
+
+* Premium
+
+* Elegant
+
+* Minimalistic
+
+* Modern
+
+* High-end
+
+* Production-ready
+
+
+
+Avoid:
+
+
+
+* Random color palettes
+
+* Neon colors
+
+* Excessive gradients
+
+* Cartoon-like visuals
+
+* Inconsistent components
+
+* Inconsistent spacing
+
+* Overly colorful dashboards
+
+* Flashy animations
+
+* Unnecessary visual noise
+
+
+
+---
+
+
+
+## DESIGN PHILOSOPHY
+
+
+
+The design should follow:
+
+
+
+* Minimalism
+
+* Functional elegance
+
+* Visual hierarchy
+
+* Content-first layouts
+
+* Consistent spacing
+
+* Reusable design patterns
+
+* Enterprise dashboard standards
+
+
+
+Every page must appear as if it belongs to the same professional design system.
+
+
+
+---
+
+
+
+## PRIMARY COLOR SYSTEM
+
+
+
+The entire application must use a neutral monochromatic palette.
+
+
+
+### Primary Colors
+
+
+
+* Black
+
+* White
+
+* Neutral Gray Shades
+
+
+
+### Approved Gray Scale
+
+
+
+* Gray 50
+
+* Gray 100
+
+* Gray 200
+
+* Gray 300
+
+* Gray 400
+
+* Gray 500
+
+* Gray 600
+
+* Gray 700
+
+* Gray 800
+
+* Gray 900
+
+* Gray 950
+
+
+
+No arbitrary branding colors should be introduced.
+
+
+
+---
+
+
+
+## LIGHT THEME
+
+
+
+### Backgrounds
+
+
+
+Primary Background:
+
+
+
+* White (#FFFFFF)
+
+
+
+Secondary Background:
+
+
+
+* Gray 50
+
+
+
+Card Background:
+
+
+
+* White
+
+
+
+Border Color:
+
+
+
+* Gray 200
+
+
+
+### Text Colors
+
+
+
+Primary Text:
+
+
+
+* Gray 900
+
+
+
+Secondary Text:
+
+
+
+* Gray 600
+
+
+
+Muted Text:
+
+
+
+* Gray 500
+
+
+
+### States
+
+
+
+Hover:
+
+
+
+* Gray 100
+
+
+
+Active:
+
+
+
+* Gray 200
+
+
+
+Focus:
+
+
+
+* Gray 300
+
+
+
+---
+
+
+
+## DARK THEME
+
+
+
+### Backgrounds
+
+
+
+Primary Background:
+
+
+
+* Gray 950
+
+
+
+Secondary Background:
+
+
+
+* Gray 900
+
+
+
+Card Background:
+
+
+
+* Gray 900
+
+
+
+Border Color:
+
+
+
+* Gray 800
+
+
+
+### Text Colors
+
+
+
+Primary Text:
+
+
+
+* White
+
+
+
+Secondary Text:
+
+
+
+* Gray 300
+
+
+
+Muted Text:
+
+
+
+* Gray 500
+
+
+
+### States
+
+
+
+Hover:
+
+
+
+* Gray 800
+
+
+
+Active:
+
+
+
+* Gray 700
+
+
+
+Focus:
+
+
+
+* Gray 600
+
+
+
+---
+
+
+
+## STATUS COLORS
+
+
+
+Status colors should only be used where semantically required.
+
+
+
+### Success
+
+
+
+* Emerald 500
+
+
+
+### Warning
+
+
+
+* Amber 500
+
+
+
+### Error
+
+
+
+* Red 500
+
+
+
+### Information
+
+
+
+* Blue 500
+
+
+
+Use status colors exclusively for:
+
+
+
+* Alerts
+
+* Notifications
+
+* Validation messages
+
+* Status badges
+
+* System indicators
+
+* Success feedback
+
+* Error feedback
+
+
+
+Do not use status colors as primary branding colors.
+
+
+
+---
+
+
+
+## ICON SYSTEM
+
+
+
+Approved icon libraries:
+
+
+
+* @tabler/icons-react-native
+
+
+
+### Icon Rules
+
+
+
+Icons should use neutral colors by default.
+
+
+
+Light Mode:
+
+
+
+* Gray 600
+
+
+
+Dark Mode:
+
+
+
+* Gray 400
+
+
+
+Icons should inherit surrounding text colors whenever possible.
+
+
+
+Avoid:
+
+
+
+* Colorful icons
+
+* Gradient icons
+
+* Decorative icon effects
+
+
+
+Only use status colors when indicating:
+
+
+
+* Success
+
+* Error
+
+* Warning
+
+* Information
+
+
+
+---
+
+
+
+## CHART DESIGN SYSTEM
+
+
+
+Charts must follow the monochromatic design language.
+
+
+
+### Primary Chart Colors
+
+
+
+Light Theme:
+
+
+
+* Gray 900
+
+* Gray 700
+
+* Gray 500
+
+* Gray 300
+
+
+
+Dark Theme:
+
+
+
+* White
+
+* Gray 300
+
+* Gray 500
+
+* Gray 700
+
+
+
+### Accent Colors
+
+
+
+Only use:
+
+
+
+* Blue
+
+* Emerald
+
+* Amber
+
+* Red
+
+
+
+for meaningful status-related visualizations.
+
+
+
+Charts must include:
+
+
+
+* Responsive layouts
+
+* Smooth rendering
+
+* Interactive legends
+
+* Tooltips
+
+* Gradient fills
+
+* Modern analytics styling
+
+
+
+Avoid rainbow-colored datasets.
+
+
+
+---
+
+
+
+## TYPOGRAPHY SYSTEM
+
+
+
+Preferred font stack:
+
+
+
+* Inter
+
+* Geist
+
+* Manrope
+
+
+
+Typography must follow a consistent hierarchy.
+
+
+
+### Headings
+
+
+
+* Bold
+
+* High contrast
+
+* Strong visual hierarchy
+
+
+
+### Body Text
+
+
+
+* Clean
+
+* Readable
+
+* Professional
+
+
+
+### Labels
+
+
+
+* Consistent sizing
+
+* Consistent spacing
+
+
+
+Avoid decorative typography.
+
+
+
+Do not use italic text as a default design choice.
+
+
+
+Italic styling should only be used when semantically necessary.
+
+
+
+---
+
+
+
+## CARD DESIGN SYSTEM
+
+
+
+Cards should include:
+
+
+
+* Large border radius
+
+* Subtle shadows
+
+* Consistent padding
+
+* Soft borders
+
+* Premium appearance
+
+
+
+Cards should remain clean and uncluttered.
+
+
+
+---
+
+
+
+## TABLE DESIGN SYSTEM
+
+
+
+All tables must support:
+
+
+
+* Search
+
+* Sorting
+
+* Filtering
+
+* Pagination
+
+* Export Actions
+
+* Column Visibility Controls
+
+* Responsive Behavior
+
+
+
+Tables should follow enterprise-grade dashboard patterns.
+
+
+
+---
+
+
+
+## FORM DESIGN SYSTEM
+
+
+
+All forms must provide:
+
+
+
+* Inline validation
+
+* Error handling
+
+* Success feedback
+
+* Loading indicators
+
+* Accessibility support
+
+
+
+Forms must remain visually consistent across all modules.
+
+
+
+---
+
+
+
+## DASHBOARD DESIGN SYSTEM
+
+
+
+Dashboards must include:
+
+
+
+* KPI Cards
+
+* Analytics Cards
+
+* Statistics Widgets
+
+* Charts
+
+* Activity Feeds
+
+* Recent Actions
+
+* Summary Reports
+
+
+
+The dashboard should resemble modern executive analytics platforms.
+
+
+
+---
+
+
+
+## MOTION SYSTEM
+
+
+
+Use Framer Motion for:
+
+
+
+* Page transitions
+
+* Modals
+
+* Drawers
+
+* Dropdowns
+
+* Navigation transitions
+
+* Loading transitions
+
+
+
+Animation Duration:
+
+
+
+* 150ms–300ms
+
+
+
+Animations should be subtle and professional.
+
+
+
+Avoid excessive motion.
+
+
+
+---
+
+
+
+## GLASSMORPHISM RULES
+
+
+
+Glassmorphism may only be used sparingly for:
+
+
+
+* Hero sections
+
+* Premium dashboard widgets
+
+* Dialog highlights
+
+
+
+Do not overuse glass effects.
+
+
+
+Maintain readability at all times.
+
+
+
+---
+
+
+
+## DESIGN CONSISTENCY RULE
+
+
+
+Every:
+
+
+
+* Page
+
+* Screen
+
+* Component
+
+* Form
+
+* Table
+
+* Chart
+
+* Dialog
+
+* Drawer
+
+* Modal
+
+* Dashboard
+
+* Navigation Element
+
+
+
+must follow this exact design language.
+
+
+
+No component may introduce a conflicting visual style.
+
+
+
+The final application must appear as a single unified premium enterprise platform.
+
+
+
+---
+
+
+
+# PHASE 16 — UI CONSISTENCY AUDIT (MANDATORY)
+
+
+
+Before completion, perform a complete UI consistency audit.
+
+
+
+Verify:
+
+
+
+✓ Consistent spacing throughout the application
+
+
+
+✓ Consistent typography hierarchy
+
+
+
+✓ Consistent component styling
+
+
+
+✓ Consistent border radius usage
+
+
+
+✓ Consistent icon usage
+
+
+
+✓ Consistent color usage
+
+
+
+✓ Consistent chart styling
+
+
+
+✓ Consistent form layouts
+
+
+
+✓ Consistent dashboard layouts
+
+
+
+✓ Consistent mobile responsiveness
+
+
+
+✓ Consistent dark mode implementation
+
+
+
+✓ Consistent light mode implementation
+
+
+
+✓ No visual design conflicts
+
+
+
+✓ No duplicate component designs
+
+
+
+✓ No inconsistent user experiences
+
+
+
+---
+
+
+
+# PHASE 17 — FINAL FRONTEND QUALITY VALIDATION (MANDATORY)
+
+
+
+Before considering the frontend complete, verify:
+
+
+
+✓ Every backend endpoint has a frontend integration
+
+
+
+✓ Every backend module has a corresponding frontend module
+
+
+
+✓ Every backend workflow has a corresponding frontend workflow
+
+
+
+✓ Every DTO has matching TypeScript interfaces
+
+
+
+✓ Every validation rule matches backend validation
+
+
+
+✓ Every permission is implemented correctly
+
+
+
+✓ Every role-based restriction is enforced
+
+
+
+✓ Every API integration is functional
+
+
+
+✓ Every page is responsive
+
+
+
+✓ Every page supports dark mode
+
+
+
+✓ Every page supports light mode
+
+
+
+✓ Every reusable component is utilized
+
+
+
+✓ No mock data remains unless explicitly required
+
+
+
+✓ No placeholder implementations remain
+
+
+
+✓ No unfinished screens remain
+
+
+
+✓ No inaccessible backend functionality exists
+
+
+
+✓ UI follows the monochromatic design system
+
+
+
+✓ Icons follow neutral color guidelines
+
+
+
+✓ Charts follow the approved chart design system
+
+
+
+✓ The application appears as a production-ready enterprise platform
+
+
+
+Deliver a frontend that is:
+
+
+
+* Production-ready
+
+* Fully responsive
+
+* Scalable
+
+* Maintainable
+
+* Accessible
+
+* Enterprise-grade
+
+* Visually premium
+
+* Fully integrated with the backend
+
+* Completely synchronized with backend functionality
+
+* Ready for real-world deployment
