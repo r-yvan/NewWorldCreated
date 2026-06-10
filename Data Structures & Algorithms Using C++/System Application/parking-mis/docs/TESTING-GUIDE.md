@@ -28,11 +28,11 @@ No external libraries are needed (C++ standard library only).
 
 ## 2. Default parking rates (tariffs)
 
-| Vehicle type | Default rate (RWF / hour)                                        |
-| ------------ | ---------------------------------------------------------------- |
-| Motorcycle   | 500                                                              |
-| Car          | 1,000                                                            |
-| Truck        | 2,000 _(not in brief — sensible default, editable via option 5)_ |
+| Vehicle type | Default rate (RWF / hour) |
+| ------------ | ------ |
+| Motorcycle   | 500    |
+| Car          | 1,000  |
+| Truck        | 2,000  |
 
 Billing rules:
 

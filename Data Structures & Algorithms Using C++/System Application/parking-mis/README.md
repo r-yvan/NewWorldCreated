@@ -21,10 +21,10 @@ No external libraries are required (standard library only).
 ## 2. Default parking rates (tariffs)
 
 | Vehicle type | Default rate (RWF / hour) |
-|--------------|---------------------------|
-| Motorcycle   | 500                       |
-| Car          | 1,000                     |
-| Truck        | 2,000 *(not given in brief; sensible default, editable at runtime)* |
+|--------------|-------|
+| Motorcycle   | 500   |
+| Car          | 1,000 |
+| Truck        | 2,000 |
 
 - Fees are calculated **only at exit**.
 - **Partial hours are billed as full hours** (rounded up). E.g. 15 min → 1 hour,
