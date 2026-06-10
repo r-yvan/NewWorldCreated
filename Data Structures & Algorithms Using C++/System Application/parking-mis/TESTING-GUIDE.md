@@ -11,15 +11,15 @@ rates**, **how to use each menu option**, and a set of **step-by-step test cases
 ### Option A — simple
 
 ```bash
-g++ main.cpp -o main
-./main
+g++ main.cpp -o PARKING-MIS
+./PARKING-MIS
 ```
 
 ### Option B — recommended (explicit standard + warnings)
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -O2 main.cpp -o parking
-./parking
+g++ -std=c++17 -Wall -Wextra -O2 main.cpp -o PARKING-MIS
+./PARKING-MIS
 ```
 
 No external libraries are needed (C++ standard library only).

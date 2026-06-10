@@ -10,8 +10,8 @@ validation.
 ## 1. How to compile & run
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -O2 main.cpp -o parking
-./parking
+g++ main.cpp -o PARKING-MIS
+./PARKING-MIS
 ```
 
 No external libraries are required (standard library only).
