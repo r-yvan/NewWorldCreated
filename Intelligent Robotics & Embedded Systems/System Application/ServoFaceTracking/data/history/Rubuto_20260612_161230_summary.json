@@ -1,0 +1,16 @@
+{
+  "person_name": "Rubuto",
+  "session_start": "2026-06-12T16:12:30.758926",
+  "session_end": "2026-06-12T16:20:22.235837",
+  "session_duration_seconds": 471.48,
+  "activity_counts": {
+    "blink": 4,
+    "smile": 6,
+    "move_left": 6,
+    "move_right": 6,
+    "move_up": 2,
+    "move_down": 2
+  },
+  "total_activities": 26,
+  "csv_log": "/home/r-yvan/Templates/Intelligent Robotics/System Application/FaceLocking/data/history/Rubuto_20260612_161230_activities.csv"
+}

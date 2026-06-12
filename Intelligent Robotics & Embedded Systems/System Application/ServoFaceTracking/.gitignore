@@ -1,0 +1,4 @@
+.env/
+*.onnx
+__pycache__/
+*.pyc
